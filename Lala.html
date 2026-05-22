@@ -1,0 +1,1695 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lala's Finery - Premium barbershop in Lagos. Book your haircut, skin fade, beard grooming, and luxury treatments with our master barbers.">
+    <title>Lala's Finery | Premium Barber Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --brand: #7c3aed;
+            --brand-light: #a78bfa;
+            --brand-dark: #5b21b6;
+            --accent: #06b6d4;
+            --bg: #0f0f1a;
+            --bg-elevated: #1a1a2e;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(255,255,255,0.08);
+            --glass: rgba(255,255,255,0.03);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="light"] {
+            --bg: #f8fafc;
+            --bg-elevated: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: rgba(0,0,0,0.08);
+            --glass: rgba(0,0,0,0.02);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .lf-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 5%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        [data-theme="light"] .lf-nav {
+            background: rgba(248, 250, 252, 0.95);
+        }
+
+        .lf-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--brand);
+            text-decoration: none;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .lf-logo i {
+                font-size: 1.4rem;
+            }
+
+        .lf-nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+            .lf-nav-links a {
+                color: var(--text);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 0.85rem;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                transition: var(--transition);
+                position: relative;
+                font-family: 'Oswald', sans-serif;
+            }
+
+                .lf-nav-links a::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: var(--brand);
+                    transition: var(--transition);
+                }
+
+                .lf-nav-links a:hover::after, .lf-nav-links a.active::after {
+                    width: 100%;
+                }
+
+                .lf-nav-links a:hover, .lf-nav-links a.active {
+                    color: var(--brand);
+                }
+
+        .lf-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lf-book-btn {
+            background: var(--brand);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+            .lf-book-btn:hover {
+                background: var(--brand-light);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+            }
+
+        .theme-toggle {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+            .theme-toggle:hover {
+                background: var(--brand);
+                color: white;
+            }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero with Makeover Effect */
+        .lf-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-slider {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+            .hero-slide.active {
+                opacity: 1;
+            }
+
+            .hero-slide::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to right, rgba(15,15,26,0.95) 0%, rgba(15,15,26,0.7) 50%, rgba(15,15,26,0.4) 100%);
+            }
+
+        .lf-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 0 5%;
+        }
+
+        .lf-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            color: var(--brand-light);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .lf-hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+            .lf-hero h1 span {
+                color: var(--brand);
+                display: block;
+            }
+
+        .lf-hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .lf-hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .lf-hero-stat {
+            text-align: center;
+        }
+
+        .lf-hero-stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: var(--brand);
+            font-weight: 700;
+        }
+
+        .lf-hero-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lf-hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .lf-btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .lf-btn-primary {
+            background: var(--brand);
+            color: white;
+        }
+
+            .lf-btn-primary:hover {
+                background: var(--brand-light);
+                transform: translateY(-3px);
+                box-shadow: 0 15px 40px rgba(124, 58, 237, 0.3);
+            }
+
+        .lf-btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+            .lf-btn-outline:hover {
+                border-color: var(--brand);
+                color: var(--brand);
+            }
+
+        /* Makeover Section */
+        .makeover-section {
+            padding: 8rem 5%;
+            background: var(--bg-elevated);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .makeover-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(to right, transparent, var(--brand), transparent);
+            }
+
+        .makeover-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+            .makeover-header h2 {
+                font-family: 'Oswald', sans-serif;
+                font-size: clamp(2rem, 4vw, 3.5rem);
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-bottom: 1rem;
+            }
+
+            .makeover-header p {
+                color: var(--text-muted);
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+        .before-after-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .before-after-slider {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+            .before-after-slider img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .after-image {
+            clip-path: inset(0 50% 0 0);
+            transition: clip-path 0.1s;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: var(--brand);
+            cursor: ew-resize;
+            z-index: 10;
+            transform: translateX(-50%);
+        }
+
+            .slider-handle::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 50px;
+                height: 50px;
+                background: var(--brand);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+            }
+
+            .slider-handle::after {
+                content: '\f337';
+                font-family: 'Font Awesome 6 Free';
+                font-weight: 900;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-size: 1rem;
+                z-index: 11;
+            }
+
+        .before-label, .after-label {
+            position: absolute;
+            bottom: 2rem;
+            padding: 8px 20px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 5;
+        }
+
+        .before-label {
+            left: 2rem;
+        }
+
+        .after-label {
+            right: 2rem;
+        }
+
+        /* Services */
+        .services-section {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+            .section-header h2 {
+                font-family: 'Oswald', sans-serif;
+                font-size: clamp(2rem, 4vw, 3.5rem);
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-bottom: 1rem;
+            }
+
+            .section-header p {
+                color: var(--text-muted);
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+
+            .service-card:hover {
+                transform: translateY(-10px);
+                border-color: var(--brand);
+                box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+            }
+
+        .service-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+            .service-content h3 {
+                font-family: 'Oswald', sans-serif;
+                font-size: 1.3rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 0.5rem;
+            }
+
+            .service-content p {
+                color: var(--text-muted);
+                font-size: 0.9rem;
+                line-height: 1.6;
+                margin-bottom: 1rem;
+            }
+
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            color: var(--brand);
+        }
+
+        .service-duration {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .service-book {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 12px;
+            background: var(--brand);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+            .service-book:hover {
+                background: var(--brand-light);
+            }
+
+        /* Booking Section */
+        .booking-section {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg) 100%);
+            position: relative;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .booking-info h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-info p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .barber-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .barber-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+            .barber-card:hover, .barber-card.selected {
+                border-color: var(--brand);
+                background: rgba(124, 58, 237, 0.05);
+            }
+
+            .barber-card.selected {
+                border-width: 2px;
+            }
+
+        .barber-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+        }
+
+        .barber-card.selected .barber-avatar {
+            border-color: var(--brand);
+        }
+
+        .barber-info h4 {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .barber-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .barber-rating {
+            color: var(--brand);
+            font-size: 0.85rem;
+        }
+
+        .booking-form {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--text-muted);
+            }
+
+            .form-group input, .form-group select {
+                width: 100%;
+                padding: 12px 16px;
+                background: var(--glass);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                color: var(--text);
+                font-size: 1rem;
+                transition: var(--transition);
+                font-family: inherit;
+            }
+
+                .form-group input:focus, .form-group select:focus {
+                    outline: none;
+                    border-color: var(--brand);
+                }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .time-slot {
+            padding: 10px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+            .time-slot:hover, .time-slot.selected {
+                background: var(--brand);
+                color: white;
+                border-color: var(--brand);
+            }
+
+            .time-slot.booked {
+                opacity: 0.4;
+                cursor: not-allowed;
+                text-decoration: line-through;
+            }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--brand);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+        }
+
+            .submit-btn:hover {
+                background: var(--brand-light);
+                transform: translateY(-2px);
+            }
+
+        /* About */
+        .about-section {
+            padding: 8rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-images {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+        }
+
+            .about-images img {
+                width: 100%;
+                border-radius: 16px;
+                object-fit: cover;
+            }
+
+                .about-images img:first-child {
+                    grid-row: span 2;
+                    height: 100%;
+                    min-height: 400px;
+                }
+
+        .about-content h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+            .about-feature i {
+                color: var(--brand);
+                font-size: 1.2rem;
+            }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 8rem 5%;
+            background: var(--bg-elevated);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+            .testimonial-card:hover {
+                border-color: var(--brand);
+                transform: translateY(-5px);
+            }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--brand);
+        }
+
+        .testimonial-info h4 {
+            font-weight: 600;
+        }
+
+        .testimonial-info span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .testimonial-stars {
+            color: var(--brand);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        .testimonial-service {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 6px 14px;
+            background: rgba(124, 58, 237, 0.1);
+            color: var(--brand);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 8rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand) 100%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+            .cta-content h2 {
+                font-family: 'Oswald', sans-serif;
+                font-size: 3.5rem;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                margin-bottom: 1rem;
+                color: white;
+            }
+
+            .cta-content p {
+                color: rgba(255,255,255,0.9);
+                margin-bottom: 2.5rem;
+                font-size: 1.1rem;
+            }
+
+        /* Footer */
+        .lf-footer {
+            background: #0a0a14;
+            border-top: 1px solid var(--border);
+            padding: 5rem 5% 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--brand);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+            .footer-column a:hover {
+                color: var(--brand);
+            }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+            .modal-overlay.open {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+        .modal {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.open .modal {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+            .modal-icon i {
+                font-size: 2rem;
+                color: #22c55e;
+            }
+
+        .modal h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .booking-grid, .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lf-nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: var(--bg-elevated);
+                flex-direction: column;
+                padding: 2rem;
+            }
+
+                .lf-nav-links.active {
+                    display: flex;
+                }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .before-after-slider {
+                height: 300px;
+            }
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+            .reveal.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="lf-nav">
+        <a href="index.html" class="lf-logo">
+            <i class="fas fa-cut"></i>
+            LALA'S FINERY
+        </a>
+
+        <ul class="lf-nav-links" id="lfNavLinks">
+            <li><a href="index.html">Hub</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#makeover">Transformations</a></li>
+            <li><a href="#booking">Book Now</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+        <div class="lf-nav-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="#booking" class="lf-book-btn">Book Appointment</a>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="lf-hero">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1920&q=80');"></div>
+        </div>
+
+        <div class="lf-hero-content">
+            <div class="lf-hero-badge">
+                <i class="fas fa-star"></i>
+                Lagos' #1 Rated Barbershop
+            </div>
+            <h1>Clean Cuts.<br><span>Sharp Looks.</span></h1>
+            <p>Experience the art of grooming at Lala's Finery. Our master barbers combine traditional techniques with modern style to create looks that turn heads.</p>
+
+            <div class="lf-hero-stats">
+                <div class="lf-hero-stat">
+                    <div class="lf-hero-stat-number">4.9</div>
+                    <div class="lf-hero-stat-label">Rating</div>
+                </div>
+                <div class="lf-hero-stat">
+                    <div class="lf-hero-stat-number">12K+</div>
+                    <div class="lf-hero-stat-label">Cuts</div>
+                </div>
+                <div class="lf-hero-stat">
+                    <div class="lf-hero-stat-number">8</div>
+                    <div class="lf-hero-stat-label">Masters</div>
+                </div>
+            </div>
+
+            <div class="lf-hero-cta">
+                <a href="#booking" class="lf-btn lf-btn-primary">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Now
+                </a>
+                <a href="#makeover" class="lf-btn lf-btn-outline">
+                    See Transformations
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Makeover Section -->
+    <section class="makeover-section" id="makeover">
+        <div class="makeover-header reveal">
+            <h2>The Lala Transformation</h2>
+            <p>Drag the slider to see the incredible before and after results our master barbers deliver</p>
+        </div>
+
+        <div class="before-after-container reveal">
+            <div class="before-after-slider" id="beforeAfterSlider">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&q=80" alt="Before" class="before-image">
+                <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=1000&q=80" alt="After" class="after-image" id="afterImage">
+                <div class="slider-handle" id="sliderHandle"></div>
+                <span class="before-label">Before</span>
+                <span class="after-label">After</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services-section" id="services">
+        <div class="section-header reveal">
+            <h2>Our Services</h2>
+            <p>Precision cuts and grooming treatments tailored to your style</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=80" alt="Classic Haircut" class="service-img">
+                <div class="service-content">
+                    <h3>Classic Haircut</h3>
+                    <p>Precision scissor cut with wash and style. Includes consultation to find the perfect look for your face shape.</p>
+                    <div class="service-meta">
+                        <span class="service-price">₦5,000</span>
+                        <span class="service-duration"><i class="fas fa-clock"></i> 45 min</span>
+                    </div>
+                    <button class="service-book" onclick="selectService('Classic Haircut', 5000)">Book This Service</button>
+                </div>
+            </div>
+
+            <div class="service-card reveal">
+                <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=80" alt="Skin Fade" class="service-img">
+                <div class="service-content">
+                    <h3>Skin Fade</h3>
+                    <p>Seamless skin fade with sharp lineup. Our signature service — zero to hero in 60 minutes.</p>
+                    <div class="service-meta">
+                        <span class="service-price">₦7,000</span>
+                        <span class="service-duration"><i class="fas fa-clock"></i> 60 min</span>
+                    </div>
+                    <button class="service-book" onclick="selectService('Skin Fade', 7000)">Book This Service</button>
+                </div>
+            </div>
+
+            <div class="service-card reveal">
+                <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=80" alt="Beard Grooming" class="service-img">
+                <div class="service-content">
+                    <h3>Beard Sculpting</h3>
+                    <p>Full beard shaping, lineup, and conditioning treatment. Hot towel finish included.</p>
+                    <div class="service-meta">
+                        <span class="service-price">₦4,000</span>
+                        <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                    </div>
+                    <button class="service-book" onclick="selectService('Beard Sculpting', 4000)">Book This Service</button>
+                </div>
+            </div>
+
+            <div class="service-card reveal">
+                <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=80" alt="Hair Treatment" class="service-img">
+                <div class="service-content">
+                    <h3>Hair Treatment</h3>
+                    <p>Deep conditioning, hot oil treatment, and scalp massage. Revitalize your hair health.</p>
+                    <div class="service-meta">
+                        <span class="service-price">₦8,000</span>
+                        <span class="service-duration"><i class="fas fa-clock"></i> 45 min</span>
+                    </div>
+                    <button class="service-book" onclick="selectService('Hair Treatment', 8000)">Book This Service</button>
+                </div>
+            </div>
+
+            <div class="service-card reveal">
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80" alt="Full Package" class="service-img">
+                <div class="service-content">
+                    <h3>The Full Package</h3>
+                    <p>Haircut, beard sculpting, facial treatment, and hot towel shave. The ultimate grooming experience.</p>
+                    <div class="service-meta">
+                        <span class="service-price">₦15,000</span>
+                        <span class="service-duration"><i class="fas fa-clock"></i> 90 min</span>
+                    </div>
+                    <button class="service-book" onclick="selectService('The Full Package', 15000)">Book This Service</button>
+                </div>
+            </div>
+
+            <div class="service-card reveal">
+                <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=600&q=80" alt="Kids Cut" class="service-img">
+                <div class="service-content">
+                    <h3>Kids Cut</h3>
+                    <p>Gentle and patient service for young gentlemen. Includes fun cape and lollipop treat.</p>
+                    <div class="service-meta">
+                        <span class="service-price">₦3,500</span>
+                        <span class="service-duration"><i class="fas fa-clock"></i> 30 min</span>
+                    </div>
+                    <button class="service-book" onclick="selectService('Kids Cut', 3500)">Book This Service</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking-section" id="booking">
+        <div class="booking-grid">
+            <div class="booking-info reveal">
+                <h2>Book Your Cut</h2>
+                <p>Choose your preferred barber and time slot. Our real-time booking system ensures you get the exact appointment you want without waiting.</p>
+
+                <div class="barber-list">
+                    <div class="barber-card selected" data-barber="lala" onclick="selectBarber(this)">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Lala" class="barber-avatar">
+                        <div class="barber-info">
+                            <h4>Lala (Founder)</h4>
+                            <p>Master Barber • 15 years exp</p>
+                            <div class="barber-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 5.0
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="barber-card" data-barber="tunde" onclick="selectBarber(this)">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="Tunde" class="barber-avatar">
+                        <div class="barber-info">
+                            <h4>Tunde</h4>
+                            <p>Senior Barber • 10 years exp</p>
+                            <div class="barber-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i> 4.9
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="barber-card" data-barber="chinedu" onclick="selectBarber(this)">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Chinedu" class="barber-avatar">
+                        <div class="barber-info">
+                            <h4>Chinedu</h4>
+                            <p>Style Specialist • 8 years exp</p>
+                            <div class="barber-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 4.8
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="barber-card" data-barber="femi" onclick="selectBarber(this)">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" alt="Femi" class="barber-avatar">
+                        <div class="barber-info">
+                            <h4>Femi</h4>
+                            <p>Beard Expert • 6 years exp</p>
+                            <div class="barber-rating">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> 4.9
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="booking-form reveal">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="bookName" required placeholder="Your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="bookPhone" required placeholder="08012345678">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Service</label>
+                        <select id="bookService" required>
+                            <option value="">Select a service</option>
+                            <option value="Classic Haircut">Classic Haircut — ₦5,000</option>
+                            <option value="Skin Fade">Skin Fade — ₦7,000</option>
+                            <option value="Beard Sculpting">Beard Sculpting — ₦4,000</option>
+                            <option value="Hair Treatment">Hair Treatment — ₦8,000</option>
+                            <option value="The Full Package">The Full Package — ₦15,000</option>
+                            <option value="Kids Cut">Kids Cut — ₦3,500</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="bookDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Time</label>
+                        <div class="time-slots" id="timeSlots">
+                            <div class="time-slot" onclick="selectTime(this)">9:00 AM</div>
+                            <div class="time-slot" onclick="selectTime(this)">10:00 AM</div>
+                            <div class="time-slot" onclick="selectTime(this)">11:00 AM</div>
+                            <div class="time-slot booked" onclick="selectTime(this)">12:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">1:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">2:00 PM</div>
+                            <div class="time-slot booked" onclick="selectTime(this)">3:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">4:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">5:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">6:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">7:00 PM</div>
+                            <div class="time-slot" onclick="selectTime(this)">8:00 PM</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Notes (Optional)</label>
+                        <input type="text" id="bookNotes" placeholder="Any specific requests?">
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-calendar-check"></i>
+                        Confirm Booking
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section" id="about">
+        <div class="about-grid">
+            <div class="about-images reveal">
+                <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80" alt="Barbershop">
+                <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&q=80" alt="Beard">
+                <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&q=80" alt="Tools">
+            </div>
+            <div class="about-content reveal">
+                <h2>Our Story</h2>
+                <p>Lala's Finery was founded in 2017 by Master Barber Lala Adeyemi, who learned the craft from his grandfather in Ibadan. What began as a single chair in a small shop in Yaba has grown into Lagos' most prestigious barbershop, with three locations across the city.</p>
+                <p>Our philosophy is rooted in the belief that a great haircut is more than just grooming — it's a transformation. Every client who sits in our chair receives a personalized consultation, precision cutting, and styling advice tailored to their lifestyle.</p>
+                <p>We invest in continuous training for our barbers, ensuring they master both classic techniques and the latest trends. Our shop features premium products from American Crew, Layrite, and our own Lala's Finery line.</p>
+
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certified Masters</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-pump-soap"></i>
+                        <span>Premium Products</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-wifi"></i>
+                        <span>Free WiFi & Drinks</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-tv"></i>
+                        <span>Sports & Entertainment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="section-header reveal">
+            <h2>Client Reviews</h2>
+            <p>Real feedback from real clients</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" alt="Client" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4>David Okonkwo</h4>
+                        <span>Banker, Ikoyi</span>
+                    </div>
+                </div>
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"I've been coming to Lala's for 3 years. The consistency is unmatched — every single cut is perfect. Lala himself knows exactly what works for my hair type."</p>
+                <span class="testimonial-service">Skin Fade</span>
+            </div>
+
+            <div class="testimonial-card reveal">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" alt="Client" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4>Michael Adeleke</h4>
+                        <span>Entrepreneur, Lekki</span>
+                    </div>
+                </div>
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The Full Package is worth every naira. Hot towel, facial, perfect fade, and beard sculpting. I leave feeling like a new man every time."</p>
+                <span class="testimonial-service">The Full Package</span>
+            </div>
+
+            <div class="testimonial-card reveal">
+                <div class="testimonial-header">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" alt="Client" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4>James Wilson</h4>
+                        <span>Expat, Victoria Island</span>
+                    </div>
+                </div>
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="testimonial-text">"As someone who's had haircuts in London, New York, and Dubai, I can say Lala's Finery is world-class. The attention to detail is incredible."</p>
+                <span class="testimonial-service">Classic Haircut</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-content reveal">
+            <h2>Ready for Your Transformation?</h2>
+            <p>Don't settle for average. Book your appointment today and discover why thousands of Lagosians trust Lala's Finery for their grooming needs.</p>
+            <div class="lf-hero-cta" style="justify-content: center;">
+                <a href="#booking" class="lf-btn" style="background: white; color: var(--brand-dark);">
+                    <i class="fas fa-calendar-check"></i>
+                    Book Now
+                </a>
+                <a href="https://wa.me/2347018147314" class="lf-btn" style="background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3);">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="lf-footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3><i class="fas fa-cut"></i> LALA'S FINERY</h3>
+                <p>Premium barbershop experience in Lagos. Where tradition meets modern style.</p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    <i class="fas fa-map-marker-alt" style="color: var(--brand);"></i> 45 Admiralty Way, Lekki Phase 1<br>
+                    <i class="fas fa-phone" style="color: var(--brand);"></i> +234 701 814 7314
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Classic Haircut</a></li>
+                    <li><a href="#">Skin Fade</a></li>
+                    <li><a href="#">Beard Sculpting</a></li>
+                    <li><a href="#">Hair Treatment</a></li>
+                    <li><a href="#">The Full Package</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Franchise</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Hours</h4>
+                <ul>
+                    <li><a href="#">Mon - Fri: 9AM - 9PM</a></li>
+                    <li><a href="#">Saturday: 9AM - 10PM</a></li>
+                    <li><a href="#">Sunday: 12PM - 6PM</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lala's Finery by Bolyn's Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3>Booking Confirmed!</h3>
+            <p>Your appointment has been scheduled. You'll receive an SMS confirmation shortly. See you soon!</p>
+            <button class="lf-btn lf-btn-primary" onclick="closeModal()" style="margin-top: 1rem;">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>// Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        themeToggle.querySelector('i').className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            themeToggle.querySelector('i').className = next === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('theme', next);
+        });
+
+        // Mobile Menu
+        document.getElementById('mobileToggle').addEventListener('click', () => {
+            document.getElementById('lfNavLinks').classList.toggle('active');
+        });
+
+        // Hero Slider
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            heroSlides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % heroSlides.length;
+            heroSlides[currentSlide].classList.add('active');
+        }, 5000);
+
+        // Before/After Slider
+        const slider = document.getElementById('beforeAfterSlider');
+        const afterImage = document.getElementById('afterImage');
+        const handle = document.getElementById('sliderHandle');
+        let isDragging = false;
+
+        function updateSlider(x) {
+            const rect = slider.getBoundingClientRect();
+            let percentage = ((x - rect.left) / rect.width) * 100;
+            percentage = Math.max(0, Math.min(100, percentage));
+            afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+            handle.style.left = percentage + '%';
+        }
+
+        handle.addEventListener('mousedown', () => isDragging = true);
+        document.addEventListener('mouseup', () => isDragging = false);
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) updateSlider(e.clientX);
+        });
+
+        // Touch support
+        handle.addEventListener('touchstart', () => isDragging = true);
+        document.addEventListener('touchend', () => isDragging = false);
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) updateSlider(e.touches[0].clientX);
+        });
+
+        // Barber Selection
+        function selectBarber(card) {
+            document.querySelectorAll('.barber-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+        }
+
+        // Service Selection
+        function selectService(name, price) {
+            document.getElementById('bookService').value = name;
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Time Slot Selection
+        function selectTime(slot) {
+            if (slot.classList.contains('booked')) return;
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            slot.classList.add('selected');
+        }
+
+        // Booking Form
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const data = {
+                name: document.getElementById('bookName').value,
+                phone: document.getElementById('bookPhone').value,
+                service: document.getElementById('bookService').value,
+                date: document.getElementById('bookDate').value,
+                time: document.querySelector('.time-slot.selected')?.textContent || '',
+                barber: document.querySelector('.barber-card.selected')?.getAttribute('data-barber') || 'lala',
+                notes: document.getElementById('bookNotes').value
+            };
+
+            // Save to localStorage
+            const bookings = JSON.parse(localStorage.getItem('lalaBookings') || '[]');
+            bookings.push({
+                ...data,
+                id: Date.now(),
+                status: 'confirmed',
+                createdAt: new Date().toISOString()
+            });
+            localStorage.setItem('lalaBookings', JSON.stringify(bookings));
+
+            document.getElementById('successModal').classList.add('open');
+            e.target.reset();
+        });
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('open');
+        }
+
+        document.getElementById('successModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        });
+
+        // Set min date to today
+        document.getElementById('bookDate').min = new Date().toISOString().split('T')[0];
+
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // Nav scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.lf-nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });</script>
+</body>
+</html>
